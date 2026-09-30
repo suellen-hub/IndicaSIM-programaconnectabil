@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IndicaSIM | Indique a Connectabil e ganhe junto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F6FB; --surface:#FFFFFF; --ink:#150F29; --muted:#5B5670; --line:#E3E0EC;
+  --band:#150F29; --band-ink:#FFFFFF; --band-muted:#C9C3DB;
+  --green:#07C86F; --green-ink:#057A45; --green-tint:#E7F9F0;
+  --purple:#610DAB; --purple-ink:#610DAB; --purple-tint:#F2EBFA;
+  --focus:#610DAB;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#110C20; --surface:#1B1531; --ink:#EEEAF7; --muted:#ABA5C0; --line:#2E2748;
+    --band:#150F29; --band-muted:#B7B0CC;
+    --green-ink:#3DDC91; --green-tint:#10301F;
+    --purple-ink:#B98DF2; --purple-tint:#27193F; --focus:#B98DF2;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#110C20; --surface:#1B1531; --ink:#EEEAF7; --muted:#ABA5C0; --line:#2E2748;
+  --band:#150F29; --band-muted:#B7B0CC;
+  --green-ink:#3DDC91; --green-tint:#10301F;
+  --purple-ink:#B98DF2; --purple-tint:#27193F; --focus:#B98DF2;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Source Sans 3","Segoe UI",system-ui,-apple-system,sans-serif;font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased}
+h1,h2,h3,.wordmark,.tab,.num,.btn{font-family:"Sora","Segoe UI",system-ui,sans-serif}
+a{color:var(--purple-ink)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+
+.masthead{background:var(--band);color:var(--band-ink);position:relative;overflow:hidden}
+.masthead::after{content:"";position:absolute;right:-120px;top:-120px;width:380px;height:380px;border-radius:50%;
+  border:56px solid var(--purple);opacity:.55;pointer-events:none}
+.masthead-inner{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:40px 24px 44px}
+.brandrow{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:40px}
+.wordmark{font-weight:700;font-size:26px;letter-spacing:-.02em;display:inline-flex;align-items:center;gap:4px}
+.wordmark .sim{background:var(--green);color:#150F29;padding:1px 9px 2px;border-radius:7px}
+.maker{font-size:14px;color:var(--band-muted)}
+.maker strong{color:var(--band-ink);font-weight:600}
+.masthead h1{font-weight:600;font-size:clamp(30px,5.2vw,46px);line-height:1.12;letter-spacing:-.025em;margin:0 0 16px;max-width:16ch}
+.masthead .lead{font-size:19px;line-height:1.55;color:var(--band-muted);margin:0;max-width:58ch}
+.flag{display:inline-block;margin-top:24px;font-size:14px;font-weight:600;color:var(--band-ink);
+  border:1.5px solid var(--green);border-radius:999px;padding:4px 14px}
+.hero-cta{margin-top:28px}
+
+.tabbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.tabs{max-width:880px;margin:0 auto;padding:0 12px;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{appearance:none;background:none;border:0;border-bottom:3px solid transparent;color:var(--muted);
+  font-size:15px;font-weight:500;padding:18px 12px 15px;cursor:pointer;white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--ink);font-weight:600;border-bottom-color:var(--green)}
+
+main{max-width:880px;margin:0 auto;padding:40px 24px 64px}
+[role=tabpanel]{max-width:760px}
+[role=tabpanel][hidden]{display:none}
+h2{font-weight:600;font-size:28px;letter-spacing:-.02em;line-height:1.2;margin:0 0 12px}
+h3{font-weight:600;font-size:18px;margin:36px 0 12px}
+.intro{font-size:19px;color:var(--muted);margin:0 0 28px;max-width:62ch}
+p{margin:0 0 16px;max-width:68ch}
+
+.principles{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.principles li{padding:16px 0;border-bottom:1px solid var(--line)}
+.principles strong{display:block;font-family:"Sora",sans-serif;font-weight:600;font-size:16px;margin-bottom:2px}
+.principles span{color:var(--muted)}
+
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:16px;padding:0 0 26px;position:relative}
+.steps li:not(:last-child)::before{content:"";position:absolute;left:21px;top:46px;bottom:4px;width:2px;background:var(--line)}
+.steps li::after{content:counter(s);grid-row:1;grid-column:1;width:44px;height:44px;border-radius:50%;
+  background:var(--green);color:#150F29;display:grid;place-items:center;font-family:"Sora",sans-serif;font-weight:700;font-size:18px}
+.steps li > div{grid-column:2;grid-row:1;padding-top:8px}
+.steps strong{font-family:"Sora",sans-serif;font-weight:600;display:block;margin-bottom:2px}
+.steps span{color:var(--muted)}
+.steps.small li{grid-template-columns:34px 1fr;padding-bottom:18px}
+.steps.small li::after{width:34px;height:34px;font-size:15px}
+.steps.small li:not(:last-child)::before{left:16px;top:36px}
+.steps.small li > div{padding-top:4px}
+
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:720px;font-size:15px}
+th,td{text-align:left;vertical-align:top;padding:14px 16px;border-bottom:1px solid var(--line)}
+th{background:var(--purple-tint);font-family:"Sora",sans-serif;font-weight:600;font-size:13.5px;color:var(--ink)}
+tr:last-child td{border-bottom:0}
+td.cost{font-weight:700;white-space:nowrap}
+td.warn{color:var(--purple-ink);font-weight:600}
+.note{font-size:14px;color:var(--muted);margin-top:12px}
+
+.rules{margin:0;border-top:1px solid var(--line)}
+.rules div{display:grid;grid-template-columns:minmax(160px,34%) 1fr;gap:20px;padding:14px 0;border-bottom:1px solid var(--line)}
+.rules dt{font-weight:600}
+.rules dd{margin:0;color:var(--muted)}
+.rules dd.open{color:var(--purple-ink);font-weight:600}
+@media (max-width:620px){.rules div{grid-template-columns:1fr;gap:2px}}
+
+.bens{display:grid;gap:14px}
+.ben{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden}
+.ben .when{grid-column:1/-1;padding:14px 20px;border-bottom:1px solid var(--line);font-weight:600}
+.ben .when b{font-family:"Sora",sans-serif}
+.ben .side{padding:16px 20px}
+.ben .side + .side{border-left:1px solid var(--line)}
+.ben .who{font-size:13.5px;font-weight:600;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.ben .who::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--green)}
+.ben .side.them .who::before{background:var(--purple)}
+.ben .val{font-size:16px}
+.ben .none{color:var(--muted)}
+.bens-head{display:flex;gap:20px;font-size:14px;color:var(--muted);margin-bottom:12px}
+@media (max-width:620px){.ben{grid-template-columns:1fr}.ben .side + .side{border-left:0;border-top:1px solid var(--line)}}
+
+.checks{list-style:none;margin:0;padding:0}
+.checks li{display:grid;grid-template-columns:24px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.checks li::before{content:"";width:20px;height:20px;margin-top:3px;border-radius:50%;border:2px solid var(--muted)}
+.checks li.done::before{border-color:var(--green);background:var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3.2 3L15 7' fill='none' stroke='%23150F29' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+.checks li.done strong{text-decoration:none}
+.checks strong{font-weight:600}
+.checks span{color:var(--muted)}
+
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#150F29;text-decoration:none;
+  font-weight:600;font-size:16px;padding:14px 24px;border-radius:10px;border:0;cursor:pointer}
+.btn:hover{filter:brightness(1.05)}
+.cta-box{margin-top:12px;padding:28px;border-radius:16px;background:var(--band);color:#fff}
+.cta-box p{color:var(--band-muted)}
+.cta-box a:not(.btn){color:#fff}
+.next{margin-top:40px;padding-top:20px;border-top:1px solid var(--line)}
+.next button{appearance:none;background:none;border:0;padding:0;cursor:pointer;color:var(--purple-ink);
+  font-family:"Sora",sans-serif;font-weight:600;font-size:15px}
+.next small{display:block;color:var(--muted);font-size:13px;margin-bottom:2px;font-family:"Source Sans 3",sans-serif}
+footer{max-width:880px;margin:0 auto;padding:0 24px 40px;font-size:14px;color:var(--muted)}
+@media (max-width:620px){main{padding:28px 20px 48px}.masthead-inner{padding:28px 20px 36px}.brandrow{margin-bottom:28px}}
+@media (prefers-reduced-motion:no-preference){[role=tabpanel]:not([hidden]){animation:in .25s ease-out}}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header class="masthead"><div class="masthead-inner"><div class="brandrow"><span class="wordmark" aria-label="IndicaSIM">Indica<span class="sim">SIM</span></span><span class="maker">um programa <strong>Connectabil</strong></span></div>
+<h1>Indique a Connectabil e ganhe junto</h1>
+<p class="lead">Você já confia na Connectabil para contratar e desenvolver profissionais contábeis e financeiros. Com o IndicaSIM, cada escritório que você indicar e fechar com a gente gera crédito para você e desconto para quem você indicou.</p>
+<div class="hero-cta"><a class="btn" href="#comece" data-goto="comece">Quero indicar</a></div></div></header>
+<nav class="tabbar" aria-label="Seções"><div class="tabs" role="tablist"><button class="tab" role="tab" id="t-como" aria-controls="como" aria-selected="false" tabindex="-1">Como funciona</button><button class="tab" role="tab" id="t-beneficios" aria-controls="beneficios" aria-selected="false" tabindex="-1">O que você ganha</button><button class="tab" role="tab" id="t-regras" aria-controls="regras" aria-selected="false" tabindex="-1">Regras</button><button class="tab" role="tab" id="t-comece" aria-controls="comece" aria-selected="false" tabindex="-1">Comece a indicar</button></div></nav>
+<main><section role="tabpanel" id="como" aria-labelledby="t-como" tabindex="0">
+<h2>Como funciona</h2>
+<p class="intro">Indicar leva dois minutos, e você começa a ganhar antes mesmo de a indicação fechar.</p>
+<ol class="steps">
+<li><div><strong>Você indica</strong><span>Preencha o formulário com o escritório ou empresa que pode se beneficiar da Connectabil.</span></div></li>
+<li><div><strong>A gente conversa</strong><span>Nosso time entra em contato com a sua indicação. Reunião realizada, você já ganha acesso a um curso da nossa plataforma de educação.</span></div></li>
+<li><div><strong>Sua indicação fecha</strong><span>Ela abre uma vaga ou assina o Banco de Talentos, e já entra com desconto.</span></div></li>
+<li><div><strong>Você recebe</strong><span>Com o pagamento dela confirmado, o crédito é liberado para você usar nos serviços da Connectabil.</span></div></li>
+</ol><div class="next"><small>Próxima aba</small><button type="button" data-goto="beneficios">O que você ganha</button></div></section><section role="tabpanel" id="beneficios" aria-labelledby="t-beneficios" tabindex="0">
+<h2>O que você e sua indicada ganham</h2>
+<p class="intro">Os dois lados saem ganhando: você economiza nas suas próximas contratações e sua indicação começa com a Connectabil pagando menos.</p>
+<div class="bens">
+<div class="ben"><div class="when">Sua indicação participa de uma reunião com a Connectabil</div>
+<div class="side"><div class="who">Você ganha</div><div class="val">Acesso a 1 curso da nossa plataforma de educação</div></div>
+<div class="side them"><div class="who">Sua indicada ganha</div><div class="val none">Uma conversa sem compromisso com o nosso time</div></div></div>
+<div class="ben"><div class="when">Ela abre uma vaga no <b>Recruta100</b></div>
+<div class="side"><div class="who">Você ganha</div><div class="val">Crédito de 5% do valor da vaga dela</div></div>
+<div class="side them"><div class="who">Sua indicada ganha</div><div class="val">10% de desconto na primeira vaga (ou na de maior honorário, se abrir mais de uma)</div></div></div>
+<div class="ben"><div class="when">Ela abre uma vaga no <b>RecrutaSim+</b></div>
+<div class="side"><div class="who">Você ganha</div><div class="val">Crédito de 15% do valor da vaga dela</div></div>
+<div class="side them"><div class="who">Sua indicada ganha</div><div class="val">20% de desconto na primeira vaga (ou na de maior honorário, se abrir mais de uma)</div></div></div>
+<div class="ben"><div class="when">Ela assina o <b>Banco de Talentos</b></div>
+<div class="side"><div class="who">Você ganha</div><div class="val">1 mês grátis do seu Banco de Talentos, ou crédito de R$ 369 se você ainda não for assinante</div></div>
+<div class="side them"><div class="who">Sua indicada ganha</div><div class="val">1 mês extra ao fechar o plano anual</div></div></div>
+</div><div class="next"><small>Próxima aba</small><button type="button" data-goto="regras">Regras</button></div></section><section role="tabpanel" id="regras" aria-labelledby="t-regras" tabindex="0">
+<h2>Regras em poucas palavras</h2>
+<p class="intro">Poucas regras, para que cada indicação sua seja reconhecida sem burocracia.</p>
+<dl class="rules">
+<div><dt>Quem pode ser indicado</dt><dd>Empresas que ainda não são clientes nem estão em negociação com a Connectabil</dd></div>
+<div><dt>Como indicar</dt><dd>Sempre pelo formulário oficial, para garantir que a indicação fique registrada no seu nome</dd></div>
+<div><dt>Prazo para fechar</dt><dd>Sua indicação tem até 60 dias após ser indicada para contratar</dd></div>
+<div><dt>Validade do seu crédito</dt><dd>O crédito é liberado assim que sua indicada confirma o pagamento e vale por 90 dias corridos a partir daí</dd></div>
+<div><dt>Uso do crédito</dt><dd>Cobre até 30% do valor de um serviço</dd></div>
+<div><dt>Promoções</dt><dd>Os benefícios do IndicaSIM não se somam a outras promoções</dd></div>
+</dl><div class="next"><small>Próxima aba</small><button type="button" data-goto="comece">Comece a indicar</button></div></section><section role="tabpanel" id="comece" aria-labelledby="t-comece" tabindex="0">
+<h2>Comece a indicar</h2>
+<p class="intro">Você conhece outros escritórios que sofrem para encontrar bons profissionais contábeis.</p>
+<p>Indicar a Connectabil ajuda quem está perto de você e ainda reduz o custo das suas próximas contratações.</p>
+<div class="cta-box">
+<p>Preencha o formulário com os dados da empresa indicada. Nosso time faz o resto e avisa você a cada etapa.</p>
+<a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSduLwNTuJxqKoi6mWbi1hpNaZ8igbTn0iqm0oORmDpYjItR-Q/viewform?usp=publish-editor" id="form-link" target="_blank" rel="noopener noreferrer">Indicar pelo formulário</a>
+<p style="margin:20px 0 0">Dúvidas sobre o programa? Fale com a gente: [contato]</p>
+</div></section></main>
+<footer>Connectabil. Programa IndicaSIM, versão de 30 de setembro de 2026.</footer>
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('[role=tab]'));
+  var panels=[].slice.call(document.querySelectorAll('[role=tabpanel]'));
+  var bar=document.querySelector('.tabbar');
+  function select(id,focus,scroll){
+    tabs.forEach(function(t){var on=t.getAttribute('aria-controls')===id;
+      t.setAttribute('aria-selected',on?'true':'false');t.tabIndex=on?0:-1;
+      if(on){if(focus)t.focus();t.scrollIntoView({block:'nearest',inline:'nearest'});}});
+    panels.forEach(function(p){p.hidden=p.id!==id;});
+    try{history.replaceState(null,'','#'+id);}catch(e){}
+    if(scroll){var y=bar.getBoundingClientRect().top+window.scrollY;if(window.scrollY>y)window.scrollTo(0,y);}
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){select(t.getAttribute('aria-controls'),false,true);});
+    t.addEventListener('keydown',function(e){var j=null;
+      if(e.key==='ArrowRight')j=(i+1)%tabs.length;if(e.key==='ArrowLeft')j=(i-1+tabs.length)%tabs.length;
+      if(e.key==='Home')j=0;if(e.key==='End')j=tabs.length-1;
+      if(j!==null){e.preventDefault();select(tabs[j].getAttribute('aria-controls'),true,true);}});
+  });
+  [].slice.call(document.querySelectorAll('[data-goto]')).forEach(function(b){
+    b.addEventListener('click',function(e){e.preventDefault();var id=b.getAttribute('data-goto');select(id,false,true);
+      var t=document.querySelector('[aria-controls="'+id+'"]');if(t)t.focus({preventScroll:true});});
+  });
+  var h=(location.hash||'').slice(1);
+  select(panels.some(function(p){return p.id===h;})?h:panels[0].id,false,false);
+})();
+</script>
+</body>
+</html>
